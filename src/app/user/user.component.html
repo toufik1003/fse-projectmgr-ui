@@ -1,0 +1,47 @@
+<div class="col-md-6">
+  <h4 class="text-left">Create User</h4>
+  <form>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input [(ngModel)]="user.userId" name="userId" class="form-control" id="userId" type="hidden">
+      <input [(ngModel)]="user.firstName" name="firstName" class="form-control" id="firstName">
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input [(ngModel)]="user.lastName" name="lastName" class="form-control" id="lastName">
+    </div>
+
+    <div class="form-group">
+      <label for="employeeId">Employee Id</label>
+      <input [(ngModel)]="user.employeeId" name="employeeId" class="form-control" id="employeeId">
+    </div>
+
+    <button class="btn btn-primary" (click)="createUser()">Create</button>
+  </form>
+  <p>&nbsp;</p>
+  <h4 class="text-left">User List</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Employee Id</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let userItem of userList">
+        <td>{{userItem.firstName}}</td>
+        <td>{{userItem.lastName}}</td>
+        <td>{{userItem.employeeId}}</td>
+        <td>
+          <!--<a [routerLink]="['/edit-user', userItem.userId]" class="btn btn-primary">Edit</a>-->
+          <button class="btn btn-primary" (click)="editUser(userItem, userItem.userId)">Edit</button>
+          &nbsp;
+          <button class="btn btn-primary" (click)="deleteUser(userItem, userItem.userId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

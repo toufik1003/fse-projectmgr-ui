@@ -1,0 +1,68 @@
+<div class="col-md-6">
+  <h4 class="text-left">Create Project</h4>
+  <form>
+    <div class="form-group">
+      <label for="projectName">Project Name</label>
+      <input [(ngModel)]="project.projectName" name="projectName" class="form-control" id="projectName">
+    </div>
+
+    <div class="form-group">
+      <ng-container>
+        <input #chkEnable ngModel type="checkbox" name="chkEnable" (change)="checkValue(chkEnable.checked?'A':'B')"/>Set Start and End Date&nbsp;
+        <input [(ngModel)]="project.startDate" name="startDate" placeholder="Start Date" class="form-control"
+          id="startDate" [disabled]="!chkEnable.checked">
+        &nbsp;
+        <input [(ngModel)]="project.endDate" name="endDate" placeholder="End Date" class="form-control" id="endDate"
+          [disabled]="!chkEnable.checked">
+      </ng-container>
+    </div>
+
+    <div class="form-group">
+      <label for="priority">Priority</label>
+      <input [(ngModel)]="project.priority" name="priority" class="form-control" id="priority">
+    </div>
+
+    <div class="form-group">
+      <label for="manager">Manager</label>
+      <select [(ngModel)]="project.userId" name="userId" class="form-control" id="userId">
+
+        <option *ngFor="let item of userList" value="{{item.userId}}">
+          {{item.firstName}}&nbsp;{{item.lastName}}
+        </option>
+
+      </select>
+    </div>
+
+    <button class="btn btn-primary" (click)="createProject()">Create</button>
+  </form>
+  <p>&nbsp;</p>
+  <h4 class="text-left">Project List</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Priority</th>
+        <th>No of Tasks</th>
+        <th>Completed</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let projectItem of projectList">
+        <td>{{projectItem.projectName}}</td>
+        <td>{{projectItem.priority}}</td>
+        <td>{{projectItem.noOfTasks}}</td>
+        <td>{{projectItem.noOfTasksCompleted}}</td>
+        <td>{{projectItem.startDate}}</td>
+        <td>{{projectItem.endDate}}</td>
+        <td>
+          <button class="btn btn-primary" (click)="editProject(projectItem, projectItem.projectId)">Edit</button>
+          &nbsp;
+          <button class="btn btn-primary" (click)="deleteProject(projectItem, projectItem.projectId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
